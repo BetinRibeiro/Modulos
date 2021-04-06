@@ -1,0 +1,56 @@
+#date
+#datetime
+#timedelta
+
+
+#Obter a data atual;
+#Obter a data antes ou após X dias da data atual;
+#Calcular a diferença de dias entre duas datas;
+#Descobrir o dia da semana em que determinada data cai;
+
+1. Obter a data atual:
+##################################################################
+>>> from datetime import date
+>>> hj = date.today()
+>>> print hj
+2012-07-10
+>>> print hj.day
+10
+>>> print hj.month
+07
+>>> print hj.year
+2012
+
+2. Obter a data há ou daqui a X dias
+##################################################################
+>>> from datetime import date
+>>> hj = date.today()
+>>> print hj.toordinal()
+734694
+>>> futuro = date.fromordinal(hj.toordinal()+45) # hoje + 45 dias
+>>> print futuro
+2012-08-24
+
+
+3. Calcular a diferença de dias entre datas
+##################################################################	
+>>> from datetime import date
+>>> hj = date.today()
+>>> print hj.toordinal()
+734694
+>>> futuro = date.fromordinal(hj.toordinal()+45) # hoje + 45 dias</pre>
+>>> diferenca = futuro - hj
+>>> print diferenca.days
+45
+
+4. Descobrir o dia da semana de uma data
+##################################################################	
+>>> from datetime import date
+>>> hj = date.today()
+>>> print hj.weekday()
+1
+
+
+##################################################################
+data_para_formatar.strftime('%d/%m/%Y')
+01/02/2021
