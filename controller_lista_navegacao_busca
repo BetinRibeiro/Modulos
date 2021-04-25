@@ -1,0 +1,88 @@
+
+import datetime
+
+#função que estou utlizando para melhorar a segunrança
+#preciso pesquisar com mais alguem e verificar uma forma melhor de operacionalizar isso
+#talvez instanciando logo a empresa no model seja uma forma de não ter que 
+#ficar repetindo essa função dentro do sistema, mas.. pode deixar um pouco mais pesado
+#é bom verificar isso com alguem que entenda melhor
+
+    #busca o usuario pertencente a empresa
+    usuario = db.usuario_empresa(db.usuario_empresa.usuario==auth.user.id)
+    #Caso usuario bloqueado ou não definido a empresa redireciona para o index
+    if (not usuario):
+        redirect(URL('default','index'))
+    #caso usuario bloqueado redireciona para pagina de aviso
+    elif usuario.bloqueado:
+        redirect(URL('acs_msg','usuario_bloqueado'))
+    #busca empresa que o usuario faz parte      
+    empresa = db.empresa(usuario.empresa)
+    
+
+
+@auth.requires_login()
+def lista_com_navegacao():
+    #busca o usuario pertencente a empresa
+    usuario = db.usuario_empresa(db.usuario_empresa.usuario==auth.user.id)
+    
+    #Caso usuario bloqueado ou não definido a empresa redireciona para o index
+    if (not usuario):
+        redirect(URL('default','index'))
+        
+    #caso usuario bloqueado redireciona para pagina de aviso
+    elif usuario.bloqueado:
+        redirect(URL('acs_msg','usuario_bloqueado'))
+        
+    #busca empresa que o usuario faz parte      
+    empresa = db.empresa(usuario.empresa)
+    
+    ##########################################################################
+    
+    #define a quantidade que será exibida
+    paginacao = 10
+    
+    #se não foi passado nada no argumento pagina é a 1
+    if len(request.args) == 0:
+        pagina = 1
+    #caso contratrio, o argumento será o numero da pagina
+    else:
+        try:
+            pagina = int(request.args[0])
+        #numero inválida mensagem de erro
+        except ValueError:
+            redirect(URL('erro', vars={
+                  'msg':'Numero da página inválido'
+                  }))
+    #se a pagina for zero pagina igual a 1
+    if pagina <= 0:
+        pagina = 1
+    #verifica o total de item que tem
+    total = db(db.pessoa.empresa==empresa.id).count()
+    #divide o total pela paginação para saber o numero de paginas
+    paginas = total/paginacao
+    #se tiver resto na divisão adicina mais uma pagina
+    #a ultima pagina terá menos itens
+    if total%paginacao:
+        paginas+=1
+    #se total=0 o numero de paginas é 1 pois tem menos item que
+    #o numero de paginação
+    if total==0:
+        paginas=1
+    #se o numero da pagina for maior que o total 
+    #de paginas redireciona como a ultima pagina
+    if pagina > paginas:
+        redirect(URL(args=[paginas]))
+    #define o limite de acordo com a pagina e a paginação
+    limites = (paginacao*(pagina-1), (paginacao*pagina))
+    #busca os registros ordenando pelo id
+    registros = db(db.pessoa.empresa==empresa.id).select(
+      limitby=limites,orderby=~db.pessoa.id
+      )
+    #caso tenha passado dois elementos o ultimo é uma pesquisa
+    consul=(request.args(1))
+    #se tiver consulta
+    if (consul):
+    #busca no banco pesquisando sentença no cpf e no nome, limita entra 0 e paginação
+        registros = db((db.pessoa.empresa==empresa.id)&((db.pessoa.cpf.contains(consul))|(db.pessoa.nome.contains(consul)))).select(limitby=(0,paginacao)) 
+    #retorna os dados que serão utilizados na view
+    return dict(rows=registros, pagina=pagina, paginas=paginas, total=total, empresa=empresa, usuario=usuario, consul=consul)
