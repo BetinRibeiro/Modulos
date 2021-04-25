@@ -1,0 +1,92 @@
+#montando estrutura (verificar os validadores do model)
+db.define_table('nome_classe',
+                #relacionamentos entra classes
+                Field('estrutura','reference estrutura'),
+                
+                #tipo string utilizado para nomes e descrições
+                Field('nome', 'string'),
+                
+                #ponto flutuante para numeros com casas decimais
+                Field('valor', 'double'),
+                
+                #para datas ( até agora não utilizo datas com horario
+                Field('data', 'date'),
+                
+                #numero inteiro para quantidades e numero de ocorrencia
+                Field('quantidade', 'integer'),
+                
+                #valor verdadeiro/falso
+                Field('conferido', 'boolean'),
+                
+                #quando será arquivado arquivo no banco de dados 
+                #verificar validadores de tipos de arquivos
+                #deu muito erro e parei de usar
+                Field('arquivo', 'upload'),
+                
+                #assinatura de quem criou ou alterou importante utilizar
+                #na maior oparte das estruturas
+                auth.signature,
+                #escopo que aparecerá nas relações
+                format='%(nome)s')
+
+#validadores
+
+#nome que aparecerá no formulario
+db.nome_classe.estrutura.label='Nome'
+
+#não deve ser mostrado em formulários, (writable=False)
+db.nome_classe.estrutura.writable=False
+
+#formulários somente leitura, (readable=True) 
+#aparece no formulario mas.. não pode ser alterado
+db.nome_classe.estrutura.readable=False
+
+#valor iniciado como padrão
+db.nome_classe.estrutura.default=numero_id
+
+#valor não pode ser nulo
+db.nome_classe.estrutura.notnull=True
+
+#validador de email
+db.nome_classe.email.requires = IS_EMAIL(error_message='Email Invalido!')
+
+#validador de cep
+
+db.nome_classe.cep.requires = IS_MATCH('^\d{5}\-?\d{3}$', error_message='Formato 63000-000'),
+
+#validadores de estrado (UF)
+db.empresa.uf.requires=IS_IN_SET(['RO','AC','AM','RR','PA','AP','TO','MA','PI','CE','RN','PB','PE','AL','SE','BA','MG','ES','RJ','SP','PR','SC','RS','MS','MT','GO','DF'])
+
+#para strings que precisam ser interidas em maiusculas
+db.nome_classe.nome.requires = IS_UPPER()
+
+#formatação de apresentação de data no formulario
+db.nome_classe.data.requires = IS_DATE(format=('%d/%m/%Y'))
+
+#seta valores padrão so aceita essas opções
+db.nome_classe.tipo_opcao.requires = IS_IN_SET(['opcao1', 'opcao2', 'opcao3'])
+
+#validadores de tamanho com mensagem de erro
+db.nome_classe.estrutura.requires=[IS_LENGTH(minsize=8, error_message='Nome muito pequeno')]
+
+#validadores de telefone com mensagem de erro
+db.nome_classe.numero_telefone.requires = IS_MATCH('^\(?\d{2}\)?\d{5}\-?\d{4}$', error_message='Formato (00)0000-0000'),
+
+#validador de cpf/cnpj com mensagem de erro
+db.nome_classe.cpfCnpj.requires  = IS_MATCH('^\d{3}\.?\d{3}\.?\d{3}\-?\d{2}|\d{2}\.?\d{3}\.?\d{3}\/?\d{4}\-?\d{2}$', error_message='cpf - 000.000.000-00 ou cnpj 00.000.000/0001-00'),
+
+
+#validadores com opções predefinidas com dados diretos do banco de dados dos vendedores do projeto
+db.nome_classe.vendedor.requires = IS_IN_DB(db(db.vendedor.projeto == projeto.id), 'vendedor.id', '%(nome)s')
+
+
+#validadores com opções predefinidas direto do banco de dados dos clientes da empresa
+db.nome_classe.cliente.requires = IS_IN_DB(db(db.cliente.empresa == usuario.empresa), 'cliente.id', '%(nome)s')
+
+
+
+
+
+
+
+
