@@ -1,0 +1,18 @@
+lista=['Miguel','Arthur','Heitor','Bernardo','Théo','Davi','Gabriel','Pedro','Samuel','Lorenzo','Benjamin','Matheus','Lucas','Benício','Gael','Joaquim','Nicolas','Henrique','Rafael','Isaac','Guilherme','Murilo','Lucca','Gustavo','JoãoMiguel','Noah','Felipe','Anthony','Enzo','JoãoPedro','Pietro','Bryan','Daniel','PedroHenrique','EnzoGabriel','Leonardo','Vicente','Valentim','Eduardo','Antônio','Emanuel','DaviLucca','Bento','João','JoãoLucas','Caleb','Levi','Vitor','Enrico','Cauã','Caio','Vinícius','Henry','JoãoGabriel','Augusto','Ravi','Francisco','Otávio','DaviLucas','JoãoGuilherme','Thomas','Ícaro','Theodoro','JoãoVitor','LuizMiguel','Yan','YuriThiago','ArthurMiguel','Nathan','Erick','Breno','LuizFelipe','AnthonyGabriel','Martin','Matteo','Oliver','ArthurGabriel','Ryan','Raul','Luan','Tomás','Mathias','DaviLuiz','PedroLucas','Derick','VitorHugo','Kauê','LucasGabriel','ArthurHenrique','Rodrigo','Bruno','DaviMiguel','Yago','José','PedroMiguel','LuizHenrique','Hugo','Otto','Josué']
+
+lista_mulher=['Helena','Alice','Laura','Manuela','Valentina','Sophia','Isabella','Heloísa','Luiza','Júlia','Lorena','Lívia','Maria Luiza','Cecília','Eloá','Giovanna','Maria Clara','Maria Eduarda','Mariana','Lara','Beatriz','Antonella','Maria Júlia','Emanuelly','Isadora','Ana Clara','Melissa','Ana Luiza','Ana Júlia','Esther','Lavínia','Maitê','Maria Cecília','Maria Alice','Sarah','Elisa','Liz','Yasmin','Isabelly','Alícia','Clara','Isis','Rebeca','Rafaela','Marina','Ana Laura','Maria Helena','Agatha','Gabriela','Catarina','Letícia','Mirella','Nicole','Luna','Maria Vitória','Olívia','Vitória','Maria','Maria Fernanda','Ana Beatriz','Allana','Maria Valentina','Milena','Emilly','Ayla','Maria Flor','Maya','Bianca','Clarice','Aurora','Larissa','Mariah','Pietra','Laís','Stella','Eduarda','Maria Heloísa','Ana Lívia','Ana Sophia','Maria Laura','Carolina','Ana Vitória','Malu','Gabrielly','Ana Liz','Analu','Maria Sophia','Ana Cecília','Amanda','Louise','Heloise','Fernanda','Ana','Melina','Maria Isis','Bella','Joana','Isabel','Melinda','Pérola']
+
+#populando as tabelas 
+from random import randint
+ a=100
+    while a<5:
+        db.pessoa.insert(empresa=1,nome=str(lista[randint(1,98)])+" "+str(lista[randint(1,98)]), telefone="(88) "+str(randint(8001,8299))+"-"+str(randint(1001,9999)), cpf=str(randint(10000,99999))+""+str(randint(100000,999999)))
+        db.cliente.insert(empresa=1,nome=str(lista_mulher[randint(1,98)])+" "+str(lista_mulher[randint(1,98)]), telefone="(88) "+str(randint(8001,8299))+"-"+str(randint(1001,9999)), cpf=str(randint(10000,99999))+""+str(randint(100000,999999)))
+        db.cheque.insert(empresa=1, cliente=randint(1,99), banco=1, proprietario=randint(1000,4000), ag=randint(1000,9999), conta=randint(1000,99999), numero=randint(10,999), valor=randint(500,2500))
+        a+=1
+        
+        
+        
+#Consulta com alteração
+#facilitará muito minha vida!!
+db(db.pessoa.empresa==None).update(empresa=empresa.id)
