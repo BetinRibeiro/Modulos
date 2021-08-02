@@ -1,0 +1,37 @@
+verificar quantas contas a empresa tem e ...
+def contas_empresas(): # lista decontas das empresas
+
+Navegar entre todos os clientes da conta e cadastrar vinculando a empresa
+def lista_clientes(): # navega entre os clientes da conta, dentro de cada conta
+
+Navegar entre todos os boletos da conta e cadastrar vinculados a empresa
+def lista_boletos(): #navega entre todos os boletos da conta, dentro de cada conta
+
+Navegar entre datas e atualizar o status dos boletos e os valores e datas de recebimentos 
+def recebimentos_datas(): navega dia a dia todos os boletos pagos, dentro de cada conta
+#caso o status esteja quitado não atualiza mais.
+
+Navegar entra todos os boletos e vincular o cliente ao boleto pelo codigo do cliente 
+def servico_vincular_cliente(): #navega entre todos os boletos buscando o cliente e vinculando, isso é um serviço
+
+Ao acessar o projeto é preciso vincular todos os boletos ao projeto... 
+
+Primeiro Filtrar por data e depois por codigo.
+#dentro de uma função db.pagamento((db.pagamento.data_criacao>=data_inicial)&
+    (db.pagamento.data_criacao<=data_final)&
+    (db.pagamento.descricao.contens("codigo_busca"))).update(projeto=projeto.id)
+Caso tenha algum boleto desvinculados a vendedor vincular pelo nome.
+# if db.pagamento((db.pagamento.projeto==projeto.id)&(db.pagamento.vendedor==None))).count()>0:
+  quando lista a equipe de vendas passa na lista vinculando boletos do projeto ao vendedor pelo nome 
+
+Painel de visualização de quantos boletos desvinculados a projeto
+#só um painel simples mostrando quantos boletos tem desvinculados 
+
+quantos boletos desvinculados a clientes
+#só um painel simples mostrando quantos boletos tem desvinculados 
+
+quantos boletos desvinculados a vendedor
+#só um painel simples mostrando quantos boletos tem desvinculados 
+
+
+
