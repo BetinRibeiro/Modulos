@@ -1,0 +1,2 @@
+
+#     db(db.projeto.id >0).update(total_compra_mercadoria=0)
