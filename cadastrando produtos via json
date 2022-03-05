@@ -1,0 +1,13 @@
+
+requestt = requests.get("endereco.json")
+todos = json.loads(requestt.content)
+    
+for row in todos:
+db.produto.update_or_insert(db.produto.descricao == row['descricao'],
+                   empresa=empresa.id,
+                   descricao=row['descricao'],
+                   quantidade=row['quantidade'],
+                   custo_unitario=row['custo'],
+                   preco_unitario=row['preco']
+                           )
+                           
