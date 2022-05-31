@@ -49,7 +49,12 @@
 >>> hj = date.today()
 >>> print hj.weekday()
 1
+##################################################################
 
+5. Retira 3 horas da data que foi gerada
+>>> from datetime import timedelta
+>>> hj = datetime.today()-timedelta(hours=3)
+data_de_hj-3hrs
 
 ##################################################################
 data_para_formatar.strftime('%d/%m/%Y')
