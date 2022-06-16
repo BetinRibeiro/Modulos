@@ -1,0 +1,68 @@
+
+db.define_table('cobranca',
+	Field('numeroConvenio', 'double',  writable=True, readable=True , notnull=True, default=0),
+	Field('numeroCarteira', 'double',  writable=True, readable=True , notnull=True, default=0),
+	Field('numeroVariacaoCarteira', 'double',  writable=True, readable=True , notnull=True, default=0),
+	Field('codigoModalidade', 'double',  writable=True, readable=True , notnull=True, default=0),
+	Field('dataEmissao', 'string',  writable=True, readable=True , notnull=True, default=""),
+	Field('dataVencimento', 'string',  writable=True, readable=True , notnull=True, default=""),
+	Field('valorOriginal', 'double',  writable=True, readable=True , notnull=True, default=0),
+	Field('valorAbatimento', 'double',  writable=True, readable=True , notnull=True, default=0),
+	Field('quantidadeDiasProtesto', 'double',  writable=True, readable=True , notnull=True, default=0),
+	Field('quantidadeDiasNegativacao', 'double',  writable=True, readable=True , notnull=True, default=0),
+	Field('orgaoNegativador', 'double',  writable=True, readable=True , notnull=True, default=0),
+	Field('indicadorAceiteTituloVencido', 'string',  writable=True, readable=True , notnull=True, default=""),
+	Field('numeroDiasLimiteRecebimento', 'double',  writable=True, readable=True , notnull=True, default=0),
+	Field('codigoAceite', 'string',  writable=True, readable=True , notnull=True, default=""),
+	Field('codigoTipoTitulo', 'double',  writable=True, readable=True , notnull=True, default=0),
+	Field('descricaoTipoTitulo', 'string',  writable=True, readable=True , notnull=True, default=""),
+	Field('indicadorPermissaoRecebimentoParcial', 'string',  writable=True, readable=True , notnull=True, default=""),
+	Field('numeroTituloBeneficiario', 'string',  writable=True, readable=True , notnull=True, default=""),
+	Field('campoUtilizacaoBeneficiario', 'string',  writable=True, readable=True , notnull=True, default=""),
+	Field('numeroTituloCliente', 'string',  writable=True, readable=True , notnull=True, default=""),
+	Field('mensagemBloquetoOcorrencia', 'string',  writable=True, readable=True , notnull=True, default=""),
+	Field('indicadorPix', 'string',  writable=True, readable=True , notnull=True, default=""),
+        format='%(descricaoTipoTitulo)s')
+                
+db.define_table('desconto',
+	Field('tipo', 'double',  writable=True, readable=True , notnull=True, default=0),
+	Field('dataExpiracao', 'string',  writable=True, readable=True , notnull=True, default=""),
+	Field('porcentagem', 'double',  writable=True, readable=True , notnull=True, default=0),
+	Field('valor', 'double',  writable=True, readable=True , notnull=True, default=0))
+  
+db.define_table('segundoDesconto',
+	Field('dataExpiracao', 'string',  writable=True, readable=True , notnull=True, default=""),
+	Field('porcentagem', 'double',  writable=True, readable=True , notnull=True, default=0),
+	Field('valor', 'double',  writable=True, readable=True , notnull=True, default=0))
+  
+db.define_table('terceiroDesconto',
+	Field('dataExpiracao', 'string',  writable=True, readable=True , notnull=True, default=""),
+	Field('porcentagem', 'double',  writable=True, readable=True , notnull=True, default=0),
+	Field('valor', 'double',  writable=True, readable=True , notnull=True, default=0))
+  
+db.define_table('jurosMora',
+	Field('tipo', 'double',  writable=True, readable=True , notnull=True, default=0),
+	Field('porcentagem', 'double',  writable=True, readable=True , notnull=True, default=0),
+	Field('valor', 'double',  writable=True, readable=True , notnull=True, default=0))
+  
+db.define_table('multa',
+	Field('tipo', 'double',  writable=True, readable=True , notnull=True, default=0),
+	Field('data', 'string',  writable=True, readable=True , notnull=True, default=""),
+	Field('porcentagem', 'double',  writable=True, readable=True , notnull=True, default=0),
+	Field('valor', 'double',  writable=True, readable=True , notnull=True, default=0))
+  
+db.define_table('pagador',
+	Field('tipoInscricao', 'double',  writable=True, readable=True , notnull=True, default=0),
+	Field('numeroInscricao', 'double',  writable=True, readable=True , notnull=True, default=0),
+	Field('nome', 'string',  writable=True, readable=True , notnull=True, default=""),
+	Field('endereco', 'string',  writable=True, readable=True , notnull=True, default=""),
+	Field('cep', 'double',  writable=True, readable=True , notnull=True, default=0),
+	Field('cidade', 'string',  writable=True, readable=True , notnull=True, default=""),
+	Field('bairro', 'string',  writable=True, readable=True , notnull=True, default=""),
+	Field('uf', 'string',  writable=True, readable=True , notnull=True, default=""),
+	Field('telefone', 'string',  writable=True, readable=True , notnull=True, default=""))
+  
+db.define_table('beneficiarioFinal',
+	Field('tipoInscricao', 'double',  writable=True, readable=True , notnull=True, default=0),
+	Field('numeroInscricao', 'double',  writable=True, readable=True , notnull=True, default=0),
+	Field('nome', 'string',  writable=True, readable=True , notnull=True, default=""))
